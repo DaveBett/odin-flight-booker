@@ -20,3 +20,24 @@
 </div>
 <%= form.submit "Search" %>
 <% end %>
+
+<br><br>
+
+<% if @flights.present? %>
+  <%= form_with url: new_booking_path, method: :get do |form| %>
+        <%= form.collection_radio_buttons :flight_id, @flights, :id, :id do |builder|%>
+            <%=builder.radio_button%>
+            <%= builder.label do %>
+                From: <%= builder.object.departure_airport.code %>
+                →
+                <%= builder.object.arrival_airport.code %>
+                |
+                <%= builder.object.date.strftime("%H:%M %m/%d/%Y") %>
+        <% end %>
+            
+        <%end%>
+
+        <%=form.hidden_field :num_passengers, value: @num_passengers%>
+        <%= form.submit "Book flight"%>
+    <%end%>
+<% end %>
