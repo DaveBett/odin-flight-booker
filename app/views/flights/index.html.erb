@@ -1,0 +1,22 @@
+<h1>Flight Booker</h1>
+
+<%= form_with url: flights_path, method: :get do |form| %>
+<div>
+  <%= form.label :departure_airport, "From:"%>
+  <%= select_tag(:departure_airport_id, options_for_select(@airports)) %>
+
+  <%= form.label :arrival_airport, "To:"%>
+  <%= select_tag(:arrival_airport_id, options_for_select(@airports)) %>
+</div>
+
+<div>
+  <%= form.label :date, "Date:" %>
+  <%= select_tag(:date, options_for_select(@available_dates.map {|d| [Date.parse(d).strftime("%d/%m"), d]})) %>
+</div>
+
+<div>
+  <%= form.label :num_passengers, "Number of Passengers:" %>
+  <%= form.select(:num_passengers, 1..4 )%>
+</div>
+<%= form.submit "Search" %>
+<% end %>
