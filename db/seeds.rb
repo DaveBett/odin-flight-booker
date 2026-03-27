@@ -15,3 +15,20 @@ airport_codes.each do |code|
   Airport.find_or_create_by!(code: code)
 end
 puts "Created #{airport_codes.length} airport(s)"
+
+airports = Airport.all
+
+airports.each do |departure|
+  airports.each do |arrival|
+    next if departure == arrival
+
+    Flight.find_or_create_by!(
+      departure_airport: departure,
+      arrival_airport: arrival,
+      date: Time.current + rand(1..7).days,
+      duration: rand(15..120)
+    )
+  end
+end
+
+puts "Created #{Flight.count} flights"
