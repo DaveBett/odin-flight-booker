@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+airport_codes = [ "FCO", "CIA", "DUB", "PSR" ]
+
+puts "Creating #{airport_codes.length} airport(s)..."
+airport_codes.each do |code|
+  Airport.find_or_create_by!(code: code)
+end
+puts "Created #{airport_codes.length} airport(s)"
